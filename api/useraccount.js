@@ -18,4 +18,8 @@ module.exports = (app, svc, jwt) => {
                 res.status(500).end()
             })
     })
+
+    app.get("/useraccount/refreshtoken", jwt.validateJWT, (req, res) => {
+        res.json({'token': jwt.generateJWT(req.user.login)})
+    })
 }
