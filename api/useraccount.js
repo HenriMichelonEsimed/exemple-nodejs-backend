@@ -5,11 +5,6 @@ module.exports = (app, svc, jwt) => {
             res.status(400).end()
             return
         }
-        const user = await this.dao.getByLogin(login.trim())
-        if (user === undefined) {
-            res.status(401).end()
-            return
-        }
         svc.validatePassword(login, password)
             .then(authenticated => {
                 if (!authenticated) {
