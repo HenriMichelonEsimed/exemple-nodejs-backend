@@ -1,8 +1,13 @@
 module.exports = (app, svc, jwt) => {
-    app.post('/useraccount/authenticate', (req, res) => {
-        const { login, password } = req.body
+    app.post('/useraccount/authenticate', async (req, res) => {
+        const {login, password} = req.body
         if ((login === undefined) || (password === undefined)) {
             res.status(400).end()
+            return
+        }
+        const user = await this.dao.getByLogin(login.trim())
+        if (user === undefined) {
+            res.status(401).end()
             return
         }
         svc.validatePassword(login, password)
