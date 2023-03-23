@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+require('dotenv').config();
 
 const CarService = require("./services/car")
 const UserAccountService = require("./services/useraccount")
@@ -15,8 +16,7 @@ app.use(cors())
 app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
 app.use(cookieParser()) // read cookies (obligatoire pour l'authentification)
 
-const connectionString = "postgres://user1:default@192.168.2.202/db1"
-const db = new pg.Pool({ connectionString: connectionString })
+const db = new pg.Pool({ connectionString: process.env.CONNECTION_STRING })
 const carService = new CarService(db)
 const userAccountService = new UserAccountService(db)
 const jwt = require('./jwt')(userAccountService)
