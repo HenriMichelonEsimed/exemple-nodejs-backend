@@ -17,6 +17,8 @@ app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
 app.use(cookieParser()) // read cookies (obligatoire pour l'authentification)
 
 const dsn = process.env.CONNECTION_STRING
+const port = process.env.PORT
+
 console.log(`Connecting to database ${dsn}`)
 const db = new pg.Pool({ connectionString:  dsn})
 const carService = new CarService(db)
@@ -26,8 +28,8 @@ require('./api/car')(app, carService, jwt)
 require('./api/useraccount')(app, userAccountService, jwt)
 require('./datamodel/seeder')(userAccountService, carService)
     .then(app.listen(
-        process.env.EXPRESS_PORT,
-        () => { console.log("Listening on the port 3333")}
+        port,
+        () => { console.log(`Listening on the port ${port}`)}
     ))
 
 
