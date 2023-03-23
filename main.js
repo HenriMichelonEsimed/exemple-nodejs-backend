@@ -1,7 +1,6 @@
 const pg = require('pg')
 const express = require('express')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 require('dotenv').config();
@@ -14,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false })) // URLEncoded form data
 app.use(bodyParser.json()) // application/json
 app.use(cors())
 app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
-app.use(cookieParser()) // read cookies (obligatoire pour l'authentification)
 
 const dsn = process.env.CONNECTION_STRING
 const port = process.env.PORT
