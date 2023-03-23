@@ -26,7 +26,7 @@ require('./api/car')(app, carService, jwt)
 require('./api/useraccount')(app, userAccountService, jwt)
 require('./datamodel/seeder')(userAccountService, carService)
     .then(app.listen(
-        3333,
+        process.env.EXPRESS_PORT,
         () => { console.log("Listening on the port 3333")}
     ))
 
