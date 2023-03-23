@@ -16,13 +16,18 @@ app.use(cors())
 app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
 app.use(cookieParser()) // read cookies (obligatoire pour l'authentification)
 
-const db = new pg.Pool({ connectionString: process.env.CONNECTION_STRING })
+const dsn = process.env.CONNECTION_STRING
+console.log(`Connecting to database ${dsn}`)
+const db = new pg.Pool({ connectionString:  dsn})
 const carService = new CarService(db)
 const userAccountService = new UserAccountService(db)
 const jwt = require('./jwt')(userAccountService)
 require('./api/car')(app, carService, jwt)
 require('./api/useraccount')(app, userAccountService, jwt)
 require('./datamodel/seeder')(userAccountService, carService)
-    .then(app.listen(3333))
+    .then(app.listen(
+        3333,
+        () => { console.log("Listening on the port 3333")}
+    ))
 
 
