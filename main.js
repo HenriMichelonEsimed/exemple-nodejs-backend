@@ -9,7 +9,7 @@ const CarService = require("./services/car")
 const UserAccountService = require("./services/useraccount")
 
 const app = express()
-app.use(bodyParser.urlencoded({ extended: false })) // URLEncoded form data
+app.use(bodyParser.urlencoded({ extended: false })) // application/x-www-form-urlencoded
 app.use(bodyParser.json()) // application/json
 app.use(cors())
 app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
