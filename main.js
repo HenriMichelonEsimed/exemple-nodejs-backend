@@ -12,7 +12,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false })) // application/x-www-form-urlencoded
 app.use(bodyParser.json()) // application/json
 app.use(cors())
-app.use(morgan('dev')); // toutes les requêtes HTTP dans le log du serveur
+app.use(morgan('combined')); // toutes les requêtes HTTP dans le log du serveur
 
 const dsn = process.env.CONNECTION_STRING
 const port = process.env.PORT
