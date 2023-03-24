@@ -11,14 +11,17 @@ module.exports = (userAccountService) => {
             if (!req.headers.authorization.startsWith("Bearer ")) {
                 return res.status(400).end()
             }
-            const token = req.headers.authorization.split(" ")[1];
+            const token = req.headers.authorization.split(" ")[1]
             jwt.verify(token, jwtKey, {algorithm: "HS256"},  async (err, user) => {
                 if (err) {
                     return res.status(401).end()
                 }
-                console.log(user)
                 try {
                     req.user = await userAccountService.dao.getByLogin(user.login)
+                    if (req.user == null) {
+                        return res.status(401).end()
+                    }
+                    console.log(req.user)
                     return next()
                 } catch(e) {
                     console.log(e)
