@@ -18,10 +18,10 @@ module.exports = (userAccountService) => {
                 }
                 try {
                     req.user = await userAccountService.dao.getByLogin(user.login)
-                    console.log(req.user)
                     if (req.user == null) {
                         return res.status(401).end()
                     }
+                    console.log(`${req.user.login} authenticated`)
                     return next()
                 } catch(e) {
                     console.log(e)
