@@ -11,6 +11,7 @@ module.exports = (app, svc, jwt) => {
                     res.status(401).end()
                     return
                 }
+                console.log(`${login} authenticated`)
                 res.json({'token': jwt.generateJWT(login)})
             })
             .catch(e => {

@@ -21,7 +21,6 @@ module.exports = (userAccountService) => {
                     if (req.user == null) {
                         return res.status(401).end()
                     }
-                    console.log(`${req.user.login} authenticated`)
                     return next()
                 } catch(e) {
                     console.log(e)
