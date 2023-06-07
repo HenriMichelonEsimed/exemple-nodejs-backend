@@ -29,5 +29,3 @@ require('./datamodel/seeder')(userAccountService, carService)
         port,
         () => { console.log(`Listening on the port ${port}`)}
     ))
-
-
