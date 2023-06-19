@@ -6,6 +6,9 @@ module.exports = class UserAccountService {
     constructor(db) {
         this.dao = new UserAccountDAO(db)
     }
+    get(login) {
+        return this.dao.getByLogin(login)
+    }
     hashPassword(password) {
         return bcrypt.hashSync(password, 10)  // 10 : cost factor -> + élevé = hash + sûr
     }
