@@ -5,8 +5,8 @@ module.exports = class UserAccountDAO extends BaseDAO {
         super(db, "useraccount")
     }
     insert(useraccount) {
-        return this.db.query("INSERT INTO useraccount(displayname,login,challenge) VALUES ($1,$2,$3)",
-            [useraccount.displayName, useraccount.login, useraccount.challenge])
+        return this.db.query("INSERT INTO useraccount(displayname,login,password) VALUES ($1,$2,$3)",
+            [useraccount.displayName, useraccount.login, useraccount.password])
     }
     getByLogin(login) {
         return new Promise((resolve, reject) =>
