@@ -41,6 +41,7 @@ module.exports = (app, svc, jwt) => {
     app.get("/useraccount/:login", async (req, res) => {
         const user = await svc.get(req.params.login)
         if (user != null) {
+            user.id = undefined
             user.password = undefined
             return res.json(user).end()
         }
