@@ -6,13 +6,17 @@ module.exports = (app, svc, jwt) => {
             return res.status(400).end()
         }
         svc.validatePassword(login, password)
-            .then(authenticated => {
-                if (!authenticated) {
+            .then(user => {
+                if (user == null) {
                     res.status(401).end()
                     return
                 }
-                console.log(`${login} authenticated`)
-                return res.json({'token': jwt.generateJWT(login)})
+                console.log(`${user.displayName} authenticated`)
+                return res.json({
+                    'login' : user.login,
+                    'displayName': user.displayName,
+                    'token': jwt.generateJWT(login)
+                })
             })
             .catch(e => {
                 console.log(e)
@@ -39,13 +43,7 @@ module.exports = (app, svc, jwt) => {
     })
 
     app.get("/useraccount/:login", async (req, res) => {
-        const user = await svc.get(req.params.login)
-        if (user != null) {
-            user.id = undefined
-            user.password = undefined
-            return res.json(user).end()
-        }
-        return res.status(404).end()
+        return res.status(await svc.get(req.params.login) == null ? 404 : 200).end()
     })
 
     app.get("/useraccount/refreshtoken", jwt.validateJWT, (req, res) => {
