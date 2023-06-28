@@ -1,6 +1,6 @@
 module.exports = class UserAccount {
-    constructor(displayName, login, password) {
-        this.displayName = displayName
+    constructor(displayname, login, password) {
+        this.displayname = displayname
         this.login = login
         this.password = password
     }
