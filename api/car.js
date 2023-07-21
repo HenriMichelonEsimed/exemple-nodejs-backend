@@ -1,7 +1,4 @@
 module.exports = (app, svc, jwt) => {
-    app.get("/car", jwt.validateJWT, async (req, res) => {
-        res.json(await svc.dao.getAll(req.user))
-    })
     app.get("/car/:id", jwt.validateJWT, async (req, res) => {
         try {
             const car = await svc.dao.getById(req.params.id)
