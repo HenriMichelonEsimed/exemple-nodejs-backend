@@ -15,7 +15,7 @@ app.use(cors())
 app.use(morgan('combined')); // toutes les requêtes HTTP dans le log du serveur
 
 const dsn = process.env.CONNECTION_STRING
-const port = process.env.PORT
+const port = process.env.PORT || 3333;
 
 console.log(`Connecting to database ${dsn}`)
 const db = new pg.Pool({ connectionString:  dsn})
