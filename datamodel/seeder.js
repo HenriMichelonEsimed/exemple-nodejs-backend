@@ -5,6 +5,7 @@ module.exports = (userAccountService, carService) => {
             await carService.dao.db.query(`CREATE TABLE car (id SERIAL PRIMARY KEY, make TEXT, model TEXT, 
                                         isrunning BOOLEAN, price NUMERIC, builddate DATE,
                                         useraccount_id INTEGER REFERENCES useraccount(id))`)
+            await userAccountService.insert('User1', 'user1', 'default');
         }catch(e)  {
             if (e.code === "42P07") { // TABLE ALREADY EXISTS https://www.postgresql.org/docs/8.2/errcodes-appendix.html
                 resolve()
