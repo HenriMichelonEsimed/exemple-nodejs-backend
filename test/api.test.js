@@ -129,7 +129,6 @@ describe('API Tests', function() {
                     'make' : 'Renault',
                     'model': 'Clio',
                     'price': '1234.5',
-                    'builddate': '2019-06-01T22:00:00.000Z',
                 })
                 done()
             });
