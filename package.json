@@ -9,7 +9,10 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "mocha": "^10.4.0",
+    "chai": "^4.4.1",
+    "chai-http": "^4.4.0"
   },
   "scripts": {
     "run": "node main.js",

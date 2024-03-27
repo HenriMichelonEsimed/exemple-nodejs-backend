@@ -25,7 +25,6 @@ const jwt = require('./jwt')(userAccountService)
 require('./api/car')(app, carService, jwt)
 require('./api/useraccount')(app, userAccountService, jwt)
 require('./datamodel/seeder')(userAccountService, carService)
-    .then(app.listen(
-        port,
-        () => { console.log(`Listening on the port ${port}`)}
-    ))
+
+const server = app.listen(port, () => { console.log(`Listening on the port ${port}`)});
+module.exports= server;
