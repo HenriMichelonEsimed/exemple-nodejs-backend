@@ -1,7 +1,7 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http');
-const { app, seedDatabase, userAccountService} = require("../main");
-const {expect} = require("chai");  // TODO : remplacer par le nom de votre script principal
+const { app, seedDatabase, userAccountService} = require("../main");   // TODO : remplacer par le nom de votre script principal
+const {expect} = require("chai");
 const should = chai.should();
 
 chai.use(chaiHttp);
