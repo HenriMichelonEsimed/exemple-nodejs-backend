@@ -15,7 +15,8 @@
     "chai-http": "^4.4.0"
   },
   "scripts": {
-    "run": "node main.js",
-    "debug": "node --inspect --inspect-brk main.js"
+    "run-server": "node main.js",
+    "debug-server": "node --inspect --inspect-brk main.js",
+    "test": "mocha"
   }
 }
