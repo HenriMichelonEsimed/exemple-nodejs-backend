@@ -12,7 +12,9 @@ module.exports = (app, svc, jwt) => {
                 return res.status(403).end()
             }
             return res.json(car)
-        } catch (e) { res.status(400).end() }
+        } catch (e) {
+            res.status(400).end()
+        }
     })
     app.post("/car", jwt.validateJWT, (req, res) => {
         const car = req.body
@@ -29,6 +31,7 @@ module.exports = (app, svc, jwt) => {
             })
     })
     app.delete("/car/:id", jwt.validateJWT, async (req, res) => {
+        try {
         const car = await svc.dao.getById(req.params.id)
         if (car === undefined) {
             return res.status(404).end()
@@ -42,6 +45,9 @@ module.exports = (app, svc, jwt) => {
                 console.log(e)
                 res.status(500).end()
             })
+        } catch (e) {
+            res.status(400).end()
+        }
     })
     app.put("/car", jwt.validateJWT, async (req, res) => {
         const car = req.body

@@ -11,7 +11,7 @@ module.exports = (app, svc, jwt) => {
                     res.status(401).end()
                     return
                 }
-                console.log(`${user.displayName} authenticated`)
+                console.log(`${user.displayname} authenticated`)
                 return res.json({
                     'login' : user.login,
                     'displayname': user.displayname,

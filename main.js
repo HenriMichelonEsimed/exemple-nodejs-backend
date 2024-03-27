@@ -14,17 +14,24 @@ app.use(bodyParser.json()) // application/json
 app.use(cors())
 app.use(morgan('combined')); // toutes les requêtes HTTP dans le log du serveur
 
-const dsn = process.env.CONNECTION_STRING
 const port = process.env.PORT || 3333;
 
-console.log(`Connecting to database ${dsn}`)
+const dsn = process.env.CONNECTION_STRING
+console.log(`Using database ${dsn}`)
 const db = new pg.Pool({ connectionString:  dsn})
+
 const carService = new CarService(db)
 const userAccountService = new UserAccountService(db)
 const jwt = require('./jwt')(userAccountService)
 require('./api/car')(app, carService, jwt)
 require('./api/useraccount')(app, userAccountService, jwt)
-require('./datamodel/seeder')(userAccountService, carService)
 
-const server = app.listen(port, () => { console.log(`Listening on the port ${port}`)});
-module.exports= server;
+const seedDatabase = async () => require('./datamodel/seeder')(userAccountService, carService)
+if (require.main === module) {
+    seedDatabase().then( () =>
+        app.listen(port, () =>
+            console.log(`Listening on the port ${port}`)
+        )
+    )
+}
+module.exports= { app, seedDatabase, userAccountService }
