@@ -14,7 +14,7 @@ describe('API Tests', function() {
     before( (done) => {
         seedDatabase().then( async () => {
             console.log("Creating test user");
-            userAccountService.insert('User1', 'user1', 'default').then( () =>
+            userAccountService.insert('User1', 'user1', 'default').then( () => // TODO adapter à votre fonction insert()
                 chai.request(app)
                     .post('/useraccount/authenticate') // TODO : remplacer par votre URL d'authentification
                     .send({login: 'user1', password: 'default'}) // TODO : remplacer par les champs attendus par votre route
