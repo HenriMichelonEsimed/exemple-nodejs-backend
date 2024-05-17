@@ -13,7 +13,7 @@ module.exports = (app, svc, jwt) => {
             }
             return res.json(car)
         } catch (e) {
-            res.status(400).end()
+            res.status(400).end(e)
         }
     })
     app.post("/car", jwt.validateJWT, (req, res) => {
@@ -46,7 +46,7 @@ module.exports = (app, svc, jwt) => {
                 res.status(500).end()
             })
         } catch (e) {
-            res.status(400).end()
+            res.status(400).end(e)
         }
     })
     app.put("/car", jwt.validateJWT, async (req, res) => {
