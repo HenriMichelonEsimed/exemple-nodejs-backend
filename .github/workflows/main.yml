@@ -44,3 +44,5 @@ jobs:
       env:
         CONNECTION_STRING: postgresql://ci_user:ci_password@localhost:5432/ci_db
         CI: true
+    - name: Run lint
+      run: npm run lint
