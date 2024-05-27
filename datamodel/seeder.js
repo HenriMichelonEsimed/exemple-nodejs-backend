@@ -1,5 +1,5 @@
-module.exports = (userAccountService, carService) => {
-    return  async (resolve, reject) => {
+module.exports = async (userAccountService, carService) => {
+    return new Promise(async (resolve, reject) => {
         console.log("Seeding database...")
         try {
             await userAccountService.dao.db.query("CREATE TABLE useraccount(id SERIAL PRIMARY KEY, displayname TEXT NOT NULL, login TEXT NOT NULL, password TEXT NOT NULL)")
@@ -15,5 +15,5 @@ module.exports = (userAccountService, carService) => {
                 reject(e)
             }
         }
-    }
+    })
 }

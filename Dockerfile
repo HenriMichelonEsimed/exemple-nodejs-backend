@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:18
 WORKDIR /app
 # Installer les dépendances
 COPY package*.json ./
