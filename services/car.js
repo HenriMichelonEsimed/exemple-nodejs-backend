@@ -4,6 +4,7 @@ module.exports = class CarService {
     constructor(db) {
         this.dao = new CarDAO(db)
     }
+
     isValid(car) {
         if ((car.make === undefined) || (car.model === undefined) || (car.price === undefined)) return false
         car.make = car.make.trim()
