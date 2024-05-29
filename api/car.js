@@ -17,6 +17,7 @@ module.exports = (app, svc, jwt) => {
             res.status(400).end()
         }
     })
+
     app.post("/car", jwt.validateJWT, (req, res) => {
         const car = req.body
         if (!svc.isValid(car))  {
@@ -31,6 +32,7 @@ module.exports = (app, svc, jwt) => {
                 res.status(500).end()
             })
     })
+
     app.delete("/car/:id", jwt.validateJWT, async (req, res) => {
         try {
         const car = await svc.dao.getById(req.params.id)
