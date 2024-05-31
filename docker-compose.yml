@@ -26,7 +26,6 @@ services:
       ports:
         - "3333:3333"
       volumes:
-        - .:/app
         - /app/node_modules
       environment:
         - CONNECTION_STRING=postgresql://tpadmin:tpadmin@postgresql:5432/tpadmin
