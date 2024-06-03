@@ -17,7 +17,7 @@ app.use(morgan('combined')); // toutes les requêtes HTTP dans le log du serveur
 const port = process.env.PORT || 3333;
 
 var dsn = process.env.CONNECTION_STRING
-if (dsn === '') {
+if (dsn === undefined) {
     const { env } = process;
     const read_base64_json = function(varName) {
         try {
