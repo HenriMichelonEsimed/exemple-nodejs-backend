@@ -15,7 +15,21 @@ app.use(cors())
 app.use(morgan('combined')); // toutes les requêtes HTTP dans le log du serveur
 
 const port = process.env.PORT || 3333;
-const dsn = process.env.CONNECTION_STRING
+
+var dsn = process.env.CONNECTION_STRING
+if (dsn === '') {
+    const { env } = process;
+    const read_base64_json = function(varName) {
+        try {
+            return JSON.parse(Buffer.from(env[varName], "base64").toString())
+        } catch (err) {
+            throw new Error(`no ${varName} environment variable`)
+        }
+    };
+    const variables = read_base64_json('PLATFORM_VARIABLES')
+    dsn = variables["CONNECTION_STRING"]
+}
+
 console.log(`Using database ${dsn}`)
 const db = new pg.Pool({ connectionString:  dsn})
 
