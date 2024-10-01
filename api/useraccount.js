@@ -42,11 +42,12 @@ module.exports = (app, svc, jwt) => {
             })
     })
 
+    app.get("/useraccount/refreshtoken", jwt.validateJWT, (req, res) => {
+        res.json({'token': jwt.generateJWT(req.user.login)})
+    })
+    
     app.get("/useraccount/:login", async (req, res) => {
         return res.status(await svc.get(req.params.login) == null ? 404 : 200).end()
     })
 
-    app.get("/useraccount/refreshtoken", jwt.validateJWT, (req, res) => {
-        res.json({'token': jwt.generateJWT(req.user.login)})
-    })
 }
