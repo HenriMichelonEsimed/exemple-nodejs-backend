@@ -34,4 +34,5 @@ if (require.main === module) {
         )
     )
 }
+
 module.exports= { app, seedDatabase, userAccountService }
